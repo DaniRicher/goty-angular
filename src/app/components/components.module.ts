@@ -15,7 +15,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
   imports: [
     CommonModule,
     RouterModule,
-    // NgxChartsModule,
+    NgxChartsModule,
   ],
   exports: [
     NavbarComponent,
