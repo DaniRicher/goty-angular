@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { GameService } from '../../services/game.service';
+import { Game } from '../../interfaces/interfaces';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-goty',
@@ -7,9 +10,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GotyComponent implements OnInit {
 
-  constructor() { }
+  juegos: Game[] = [];
+
+  constructor( private gameService: GameService ) { }
 
   ngOnInit(): void {
+
+    this.gameService.getNominados()
+          .subscribe( juegos => {
+            console.log( juegos );
+            this.juegos = juegos
+          });
+
+  }
+  votarJuego( juego: Game ) {
+
+    this.gameService.votarJuego( juego.id )
+          .subscribe( (resp: any) => {
+            console.log( resp );
+            if( resp.ok ) {
+              Swal.fire( 'Gracias', resp.msg, 'success' );
+            } else {
+              Swal.fire( 'Opps!', resp.msg, 'error' );
+            }
+          });
+
   }
 
 }
