@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-inicio',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InicioComponent implements OnInit {
 
-  constructor() { }
+  juegos: any[] = [];
+
+  constructor( private db: AngularFirestore ) { }
 
   ngOnInit(): void {
+    this.db.collection('goty').valueChanges()
+          .pipe(
+            map( (resp: any[]) => {
+              return resp.map( ({ name, votos }) => ({name, value: votos }));
+            })
+          )
+          .subscribe( juegos => {
+            // console.log(juegos);
+            this.juegos = juegos;
+          });
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-grafico-barra-horizontal',
@@ -7,24 +7,26 @@ import { Component, OnDestroy } from '@angular/core';
 })
 export class GraficoBarraHorizontalComponent implements OnDestroy {
 
-  results: any[] = [
-    {
-      "name": "Juego 1",
-      "value": 20
-    },
-    {
-      "name": "Juego 2",
-      "value": 25
-    },
-    {
-      "name": "Juego 3",
-      "value": 15
-    },
-    {
-      "name": "Juego 4",
-      "value": 30
-    }
-  ];
+  @Input() results: any[] = [];
+
+  // results: any[] = [
+  //   {
+  //     "name": "Juego 1",
+  //     "value": 20
+  //   },
+  //   {
+  //     "name": "Juego 2",
+  //     "value": 25
+  //   },
+  //   {
+  //     "name": "Juego 3",
+  //     "value": 15
+  //   },
+  //   {
+  //     "name": "Juego 4",
+  //     "value": 30
+  //   }
+  // ];
 
   // options
   showXAxis = true;
@@ -38,30 +40,30 @@ export class GraficoBarraHorizontalComponent implements OnDestroy {
 
   colorScheme = 'nightLights';
 
-  intervalo:any;
+  // intervalo:any;
 
   constructor() {
 
-    this.intervalo = setInterval( () => {
+    // this.intervalo = setInterval( () => {
 
-      const newResults = [...this.results];
+    //   const newResults = [...this.results];
 
-      for( let i in newResults ) {
-        newResults[i].value = Math.round( Math.random() * 500 );
-      }
+    //   for( let i in newResults ) {
+    //     newResults[i].value = Math.round( Math.random() * 500 );
+    //   }
 
-      //Otra forma
-      // newResults.forEach( element => {
-      //   element.value = Math.round( Math.random() * 500 );
-      // });
+    //   //Otra forma
+    //   // newResults.forEach( element => {
+    //   //   element.value = Math.round( Math.random() * 500 );
+    //   // });
 
-      this.results = [...newResults];
-    }, 1500 );
+    //   this.results = [...newResults];
+    // }, 1500 );
 
 
   }
   ngOnDestroy(): void {
-    clearInterval( this.intervalo );
+    // clearInterval( this.intervalo );
   }
 
   onSelect(event:any) {
